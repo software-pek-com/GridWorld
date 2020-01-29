@@ -39,6 +39,9 @@ public class GridWorldController {
 		file.write(fileBytes);
 		file.close();
 
+		GridWorldSimulator simulator = new GridWorldSimulator();
+		simulator.writeItAll();
+
 		return response;
 	}
 

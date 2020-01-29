@@ -2,7 +2,7 @@ package com.example.gridworld;
 
 public enum CellStatus {
 
-    White(" "), Black("X");
+    White(" "), Black("X"), MachineOnWhite("M"), MachineOnBlack("m");
 
     String status;
     

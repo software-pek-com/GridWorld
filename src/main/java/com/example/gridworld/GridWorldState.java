@@ -9,20 +9,30 @@ import java.util.HashSet;
  * REMARKS
  * The GridWorld is infinite.
  * The default (and arbitrary) choice of the starting position of the Machine is taken to be (0,0).
- * All cells are initially white.
+ * The default choice of the starting direction is right/east.
+ * All cells are initially white i.e. blacklist is empty.
  */
 class GridWorldState {
     private HashSet<Position> blacklist;
     private MachineState machine;
 
-    public GridWorldState() {
-        this.blacklist = new HashSet<Position>();
+    /**
+     * For unit test use only.
+     * Creates an instance of this class initialized with the given blacklist.
+     */
+    protected GridWorldState(HashSet<Position> blacklist) {
+        this.blacklist = blacklist;
+        //Default position is (0,0) and direction is right/east.
         this.machine = new MachineState();
     }
 
-    public GridWorldState(Position position, Vector direction) {
+    /**
+     * Creates an instance of this class initialized with defaults.
+     */
+    public GridWorldState() {
         this.blacklist = new HashSet<Position>();
-        this.machine = new MachineState(position, direction);
+        //Default position is (0,0) and direction is right/east.
+        this.machine = new MachineState();
     }
 
     /**
@@ -30,18 +40,6 @@ class GridWorldState {
      */
     public boolean isCellBlack(Position cell) {
         return blacklist.contains(cell);
-    }
-
-    /**
-     * Returns the given cell's colour.
-     */
-    public CellColour getCellColour(Position cell) {
-        if (isCellBlack(cell)) {
-            return CellColour.Black;
-        }
-        else {
-            return CellColour.White;
-        }
     }
 
     /**
@@ -76,16 +74,17 @@ class GridWorldState {
     }
 
     /**
-     * Returns the set of black cells.
-     */
-    public HashSet<Position> getBlacklist() {
-        return blacklist;
-    }
-
-    /**
      * Returns the machine's state.
      */
     public MachineState getMachine() {
         return machine;
+    }
+
+    /**
+     * For unit test use only.
+     * Returns the set of black cells.
+     */
+    protected HashSet<Position> getBlacklist() {
+        return blacklist;
     }
 }

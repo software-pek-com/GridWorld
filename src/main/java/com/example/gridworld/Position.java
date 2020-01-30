@@ -3,8 +3,7 @@ package com.example.gridworld;
 import java.util.Objects;
 
 /**
- * The Position class provides cell coordinates in the GridWrold frame of
- * reference.
+ * Represents cell coordinates in the GridWrold frame of reference.
  * 
  * REMARKS
  * Since the GridWorld is infinite, the default (and arbitrary) choice

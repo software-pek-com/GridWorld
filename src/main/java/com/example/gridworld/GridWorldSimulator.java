@@ -3,8 +3,8 @@ package com.example.gridworld;
 import java.util.HashSet;
 
 /**
- * The GridWorldSimulator class holds the state of the GridWorld and
- * makes moves with the machine.
+ * Represents the GridWorld simulator which holds the state of the GridWorld and
+ * moves the machine.
  * 
  * REMARKS
  * The GridWorld is infinite.

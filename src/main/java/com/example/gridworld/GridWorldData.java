@@ -3,7 +3,7 @@ package com.example.gridworld;
 import java.util.HashSet;
 
 /**
- * The GridWorldData class holds a snapshot of the state of the GridWorldSimulator.
+ * Represents a snapshot of the state of the GridWorldSimulator.
  */
 class GridWorldData {
 

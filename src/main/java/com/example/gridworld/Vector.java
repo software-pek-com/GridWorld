@@ -3,7 +3,10 @@ package com.example.gridworld;
 import java.util.Objects;
 
 /**
- * The Vector class provides vectors in the GridWorld frame of reference.
+ * Represents vectors in the GridWorld frame of reference.
+ * 
+ * REMARKS
+ * This class could ensure only valid directions can be created.
  */
 class Vector {
     private int x;

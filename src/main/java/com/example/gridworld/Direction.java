@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * The Direction class defines valid GridWorld directions and helper
- * methods to correctly rotate directions (clockwise and counter-clockwise).
+ * Represents valid GridWorld directions and helper
+ * methods to correctly apply rotations (clockwise and counter-clockwise).
  * 
  * REMARKS
  * The order of vectors in directionsNESW has been chosen to correspond to rotations

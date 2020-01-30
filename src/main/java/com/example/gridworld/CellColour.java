@@ -1,7 +1,7 @@
 package com.example.gridworld;
 
 /**
- * The CellColour enum defines the set of colours of GridWorld cells i.e. black or white.
+ * Represents the set of colours of GridWorld cells i.e. black or white.
  */
 public enum CellColour {
 

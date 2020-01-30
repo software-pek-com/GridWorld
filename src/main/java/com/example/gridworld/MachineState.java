@@ -1,8 +1,7 @@
 package com.example.gridworld;
 
 /**
- * The MachineState class provides the state of the GridWorld Machine
- * which means its position and direction.
+ * Represents the state of the GridWorld machine i.e. its position and direction.
  */
 class MachineState {
 

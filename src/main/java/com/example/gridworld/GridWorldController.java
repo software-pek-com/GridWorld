@@ -1,9 +1,7 @@
 package com.example.gridworld;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
-import java.nio.file.Files;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -13,9 +11,11 @@ import com.google.gson.Gson;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+/**
+ * Represents a REST web controller for our GridWorld simulator.
+ */
 @RestController
 public class GridWorldController {
 
@@ -27,12 +27,26 @@ public class GridWorldController {
 
 	@RequestMapping("/hello")
 	public String index() {
-		String response = "Greetings from Spring Boot! Time now is ";
-		return response + nowAsString();
+		return "Greetings from Grid World! The time now is "+ nowAsString();
 	}
 
-	@PutMapping("/save/{moveCount}")
-	public String saveToFile(@RequestBody String message, @PathVariable Integer moveCount) 
+	/**
+	 * Controller method for the GridWorld simulation. The simulation performs
+	 * 'moveCount' moves of the machine in the grid. After the simulation ends
+	 * the resulting GridWorld snapshot (list of black cells, position and direction
+	 * of the machine) is written to a file as JSON (for readability).
+	 * 
+	 * REMARKS
+	 * Since the GridWorldSimulator always starts from the same position the
+	 * same number of moves (in different simulations) results in the same GridWorld state.
+	 * For this reason an optimization has been implemented which checks first if the
+	 * given 'moveCount' simulation has already been done (the output file exists) and
+	 * only performs the simulation if it hasn't.
+	 * The returned response string reports what happened i.e. whether a new simulation file
+	 * was created or if it existed already.
+	 */
+	@PutMapping("/simulate/{moveCount}")
+	public String simulate(@PathVariable Integer moveCount) 
 		throws Exception {
 
 		// Use moveCount as the 'simulation identifier' because the same
@@ -44,6 +58,8 @@ public class GridWorldController {
 
 		File simulationOutput = new File(fileName);
 
+		// Check if simulation file already exists. Only do simulation
+		// if it is not already there.
 		if (simulationOutput.createNewFile()) {
 			GridWorldSimulator gridWorld = new GridWorldSimulator();
 
@@ -55,33 +71,19 @@ public class GridWorldController {
 			// Write GridWorld snapshot to file.
 			Gson gson = new Gson();
 			String snapshotAsJson = gson.toJson(gridWorld.getSnapshot());
+
 			FileWriter writer = new FileWriter(simulationOutput);
 			writer.write(snapshotAsJson);
 			writer.close();
 
-			response = String.format("Saved simulation in file '%s' [%s].", fileName, timeStamp);
+			response = String.format("New simulation saved in file '%s' [%s].", fileName, timeStamp);
 		}
 		else {
-			// No need to simulate and write GridWorld state to file if
-			// file already exists because it means this simulation has been done.
-			response = String.format("Simulation '%s' already exists [%s].", fileName, timeStamp);
+			// No need to simulate and write GridWorld state to file if file
+			// already exists because it means this simulation has been done before.
+			response = String.format("Simulation '%s' already existed [%s].", fileName, timeStamp);
 		}
 
 		return response;
-	}
-
-	@RequestMapping("/gridworld")
-	public String gridWorld() {
-		GridWorldSimulator gridWorld = new GridWorldSimulator();
-
-		gridWorld.moveMachineOnce();
-		gridWorld.moveMachineOnce();
-		gridWorld.moveMachineOnce();
-		gridWorld.moveMachineOnce();
-		
-		Gson gson = new Gson();
-        String json = gson.toJson(gridWorld.getSnapshot());
-
-		return json;
 	}
 }

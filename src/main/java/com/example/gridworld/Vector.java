@@ -9,15 +9,24 @@ class Vector {
     private int x;
     private int y;
 
+    /**
+     * Creates an instance of this class initialized from given parameters.
+     */
     public Vector(int x, int y) {
         this.x = x;
         this.y = y;
     }
 
+    /**
+     * Returns the vector's x-coordinate.
+     */
     public int getX() {
         return x;
     }
 
+    /**
+     * Returns the vector's y-coordinate.
+     */
     public int getY() {
         return y;
     }
@@ -32,6 +41,6 @@ class Vector {
     }
 
     @Override public String toString() {
-        return String.format("(%d,%d)", x, y);
+        return String.format("[%d,%d]", x, y);
     }
 }

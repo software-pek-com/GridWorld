@@ -14,7 +14,7 @@ class MachineState {
      * and direction facing east (right).
      */
     public MachineState() {
-        this.position = new CellRef(); // (0,0)
+        this.position = CellRef.getDefault(); // (0,0)
         this.direction = Direction.getDefault(); // Facing east.
     }
 

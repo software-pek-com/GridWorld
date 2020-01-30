@@ -14,20 +14,33 @@ class CellRef {
     private int x;
     private int y;
 
-    public CellRef() {
+    private static CellRef zero = new CellRef();
+
+    public static CellRef getDefault() { return zero; }
+
+    private CellRef() {
         this.x = 0;
         this.y = 0;
     }
 
+    /**
+     * Creates an instance of this class initialized from given parameters.
+     */
     public CellRef(int x, int y) {
         this.x = x;
         this.y = y;
     }
 
+    /**
+     * Returns the x-coordinate.
+     */
     public int getX() {
         return x;
     }
 
+    /**
+     * Returns the y-coordinate.
+     */
     public int getY() {
         return y;
     }
@@ -39,5 +52,9 @@ class CellRef {
 
     @Override public int hashCode() {
         return Objects.hash(x, y);
+    }
+
+    @Override public String toString() {
+        return String.format("(%d,%d)", x, y);
     }
 }

@@ -18,7 +18,7 @@ class Direction {
      * List of valid directions in the N,E,S,W order.
      */
     public static List<Vector> NESW = 
-        //            0                 1                 2                  3
+        //            0 (N)             1 (E)             2 (W)              3 (S)
         Arrays.asList(new Vector(0, 1), new Vector(1, 0), new Vector(0, -1), new Vector(-1, 0));
 
     /**
@@ -63,11 +63,7 @@ class Direction {
      * direction throws IndexOutOfBoundsException. If valid does nothing.
      */
     public static void validateAsDirection(Vector v) {
-        int directionIndex = NESW.indexOf(v);
-        if (directionIndex == -1) {
-            throw new IndexOutOfBoundsException(
-                String.format("%s is not a valid direction.", v.toString()));
-        }
+        getDirectionIndex(v);
     }
 
     private static int getDirectionIndex(Vector v) {

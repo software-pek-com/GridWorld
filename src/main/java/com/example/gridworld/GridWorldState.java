@@ -57,9 +57,12 @@ class GridWorldState {
     }
 
     /**
-     * Performs one move of the machine as per the rules.
+     * Performs one move as per the rules:
+     * + If the machine is in a white square, turn 90° clockwise and move forward 1 unit.
+     * + If the machine is in a black square, turn 90° counter-clockwise and move forward 1 unit.
+     * + At every move flip the colour of the base square.
      */
-    public void moveMachine() {
+    public void moveOnce() {
         CellRef positionBeforeMove = machine.getPosition();
 
         if (isCellBlack(positionBeforeMove)) {

@@ -14,8 +14,8 @@ public class CellRefTests {
 	class AnotherType {}
 
 	@Test
-	public void CellRef_DefaultConstructor() {
-		CellRef target = new CellRef();
+	public void CellRef_Default_Constructor() {
+		CellRef target = CellRef.getDefault();
 
 		assertEquals(0, target.getX());
 		assertEquals(0, target.getY());

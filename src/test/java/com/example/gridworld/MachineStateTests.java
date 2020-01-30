@@ -14,8 +14,8 @@ public class MachineStateTests {
 	public void MachineState_Default_Constructor() {
 		MachineState target = new MachineState();
 
-		assertEquals(new CellRef(), target.getPosition());
-		assertEquals(Direction.NESW.get(1), target.getDirection());
+		assertEquals(CellRef.getDefault(), target.getPosition());
+		assertEquals(Direction.getDefault(), target.getDirection());
 	}
 
 	@Test

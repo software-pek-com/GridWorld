@@ -3,7 +3,7 @@ package com.example.gridworld;
 import java.util.Objects;
 
 /**
- * The Vector class provides vectors in the GridWrold frame of reference.
+ * The Vector class provides vectors in the GridWorld frame of reference.
  */
 class Vector {
     private int x;

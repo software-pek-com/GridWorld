@@ -12,14 +12,14 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class GridWorldStateTests {
+public class GridWorldSimulatorTests {
 
-	class GridWorldState_Accessor extends GridWorldState
+	class GridWorldSimulator_Accessor extends GridWorldSimulator
 	{
-		public GridWorldState_Accessor() {
+		public GridWorldSimulator_Accessor() {
 		}
 
-		public GridWorldState_Accessor(HashSet<Position> blacklist) {
+		public GridWorldSimulator_Accessor(HashSet<Position> blacklist) {
 			super(blacklist);
 		}
 
@@ -29,8 +29,8 @@ public class GridWorldStateTests {
 	}
 
 	@Test
-	public void GridWorldState_Default_Constructor() {
-		GridWorldState_Accessor target = new GridWorldState_Accessor();
+	public void GridWorldSimulator_Default_Constructor() {
+		GridWorldSimulator_Accessor target = new GridWorldSimulator_Accessor();
 
 		assertEquals(0, target.getBlacklist_Accessor().size());
 		assertEquals(Position.getDefault(), target.getMachine().getPosition());
@@ -38,29 +38,29 @@ public class GridWorldStateTests {
 	}
 
 	@Test
-	public void GridWorldState_IsCellBlack_For_Black() {
+	public void GridWorldSimulator_IsCellBlack_For_Black() {
 		Position blackPosition = new Position(0,1);
 		HashSet<Position> expectedBlacklist = new HashSet<Position>();
 		expectedBlacklist.add(blackPosition);
-		GridWorldState target = new GridWorldState_Accessor(expectedBlacklist);
+		GridWorldSimulator target = new GridWorldSimulator_Accessor(expectedBlacklist);
 
 		assertThat(target.isCellBlack(blackPosition), is(true));
 	}
 
 	@Test
-	public void GridWorldState_IsCellBlack_For_White() {
+	public void GridWorldSimulator_IsCellBlack_For_White() {
 		Position whitePosition = new Position(0,1);
-		GridWorldState target = new GridWorldState_Accessor(new HashSet<Position>());
+		GridWorldSimulator target = new GridWorldSimulator_Accessor(new HashSet<Position>());
 
 		assertThat(target.isCellBlack(whitePosition), is(false));
 	}
 
 	@Test
-	public void GridWorldState_ToggleCellColour_For_Black() {
+	public void GridWorldSimulator_ToggleCellColour_For_Black() {
 		Position blackPosition = new Position(0,1);
 		HashSet<Position> expectedBlacklist = new HashSet<Position>();
 		expectedBlacklist.add(blackPosition);
-		GridWorldState target = new GridWorldState_Accessor(expectedBlacklist);
+		GridWorldSimulator target = new GridWorldSimulator_Accessor(expectedBlacklist);
 
 		assertThat(target.isCellBlack(blackPosition), is(true));
 
@@ -70,9 +70,9 @@ public class GridWorldStateTests {
 	}
 
 	@Test
-	public void GridWorldState_ToggleCellColour_For_White() {
+	public void GridWorldSimulator_ToggleCellColour_For_White() {
 		Position whitePosition = new Position(0,1);
-		GridWorldState target = new GridWorldState_Accessor(new HashSet<Position>());
+		GridWorldSimulator target = new GridWorldSimulator_Accessor(new HashSet<Position>());
 
 		assertThat(target.isCellBlack(whitePosition), is(false));
 
@@ -82,42 +82,42 @@ public class GridWorldStateTests {
 	}
 
 	@Test
-	public void GridWorldState_MoveOnce_From_Black() {
+	public void GridWorldSimulator_MoveOnce_From_Black() {
 		Position blackPosition = new Position(0,0);
 		HashSet<Position> expectedBlacklist = new HashSet<Position>();
 		expectedBlacklist.add(blackPosition);
-		GridWorldState target = new GridWorldState_Accessor(expectedBlacklist);
+		GridWorldSimulator target = new GridWorldSimulator_Accessor(expectedBlacklist);
 
 		assertThat(target.isCellBlack(blackPosition), is(true));
 
-		target.moveOnce();
+		target.moveMachineOnce();
 
 		assertThat(target.isCellBlack(blackPosition), is(false));
 		assertEquals(new Position(0,1), target.getMachine().getPosition());
 	}
 
 	@Test
-	public void GridWorldState_MoveOnce_From_White() {
+	public void GridWorldSimulator_MoveOnce_From_White() {
 		Position whitePosition = new Position(0,0);
-		GridWorldState target = new GridWorldState();
+		GridWorldSimulator target = new GridWorldSimulator();
 
 		assertThat(target.isCellBlack(whitePosition), is(false));
 
-		target.moveOnce();
+		target.moveMachineOnce();
 
 		assertThat(target.isCellBlack(whitePosition), is(true));
 		assertEquals(new Position(0,-1), target.getMachine().getPosition());
 	}
 
 	@Test
-	public void GridWorldState_Move_Five_Times_From_Defaults() {
-		GridWorldState_Accessor target = new GridWorldState_Accessor();
+	public void GridWorldSimulator_Move_Five_Times_From_Defaults() {
+		GridWorldSimulator_Accessor target = new GridWorldSimulator_Accessor();
 
 		{
 			Position position = target.getMachine().getPosition();
 			assertThat(target.isCellBlack(position), is(false));
 
-			target.moveOnce();
+			target.moveMachineOnce();
 
 			assertThat(target.isCellBlack(position), is(true));
 			assertEquals(new Position(0,-1), target.getMachine().getPosition());
@@ -127,7 +127,7 @@ public class GridWorldStateTests {
 			Position position = target.getMachine().getPosition();
 			assertThat(target.isCellBlack(position), is(false));
 
-			target.moveOnce();
+			target.moveMachineOnce();
 
 			assertThat(target.isCellBlack(position), is(true));
 			assertEquals(new Position(-1,-1), target.getMachine().getPosition());
@@ -137,7 +137,7 @@ public class GridWorldStateTests {
 			Position position = target.getMachine().getPosition();
 			assertThat(target.isCellBlack(position), is(false));
 
-			target.moveOnce();
+			target.moveMachineOnce();
 
 			assertThat(target.isCellBlack(position), is(true));
 			assertEquals(new Position(-1,0), target.getMachine().getPosition());
@@ -147,7 +147,7 @@ public class GridWorldStateTests {
 			Position position = target.getMachine().getPosition();
 			assertThat(target.isCellBlack(position), is(false));
 
-			target.moveOnce();
+			target.moveMachineOnce();
 
 			assertThat(target.isCellBlack(position), is(true));
 			assertEquals(new Position(0,0), target.getMachine().getPosition());
@@ -157,7 +157,7 @@ public class GridWorldStateTests {
 			Position position = target.getMachine().getPosition();
 			assertThat(target.isCellBlack(position), is(true));
 
-			target.moveOnce();
+			target.moveMachineOnce();
 
 			assertThat(target.isCellBlack(position), is(false)); // Was black now it is white again.
 			assertEquals(new Position(0,1), target.getMachine().getPosition());

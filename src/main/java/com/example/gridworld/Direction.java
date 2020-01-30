@@ -1,6 +1,5 @@
 package com.example.gridworld;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -18,16 +17,14 @@ class Direction {
     /**
      * List of valid directions in the N,E,S,W order.
      */
-    public static List<Vector> NESW = new ArrayList<Vector>(
+    public static List<Vector> NESW = 
         //            0                 1                 2                  3
-        Arrays.asList(new Vector(0, 1), new Vector(1, 0), new Vector(0, -1), new Vector(-1, 0))
-    );
+        Arrays.asList(new Vector(0, 1), new Vector(1, 0), new Vector(0, -1), new Vector(-1, 0));
 
     /**
      * Returns the default direction (i.e. facing right/east).
      */
     public static Vector getDefault() {
-
         return NESW.get(1);
     }
 
@@ -35,7 +32,6 @@ class Direction {
      * Rotates the given vector clockwise (right).
      */
     public static Vector rotateClockwise(Vector v) {
-
         int directionIndex = getDirectionIndex(v);
 
         // If the new index points beyond our range then wrap it back to the front.
@@ -51,7 +47,6 @@ class Direction {
      * Rotates the given vector counter-clockwise (left).
      */
     public static Vector rotateCounterClockwise(Vector v) {
-
         int directionIndex = getDirectionIndex(v);
 
         // If the new index points before our range then wrap it back to the end.
@@ -68,7 +63,6 @@ class Direction {
      * direction throws IndexOutOfBoundsException. If valid does nothing.
      */
     public static void validateAsDirection(Vector v) {
-
         int directionIndex = NESW.indexOf(v);
         if (directionIndex == -1) {
             throw new IndexOutOfBoundsException(
@@ -77,7 +71,6 @@ class Direction {
     }
 
     private static int getDirectionIndex(Vector v) {
-
         int directionIndex = NESW.indexOf(v);
         if (directionIndex == -1) {
             throw new IndexOutOfBoundsException(

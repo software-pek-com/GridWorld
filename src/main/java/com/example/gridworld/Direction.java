@@ -4,15 +4,16 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Represents valid GridWorld directions and helper
- * methods to correctly apply rotations (clockwise and counter-clockwise).
+ * Represents valid GridWorld directions wrt (0,0) and helper
+ * methods to correctly apply rotations (clockwise and counter-clockwise)
+ * around the (0,0) position.
  * 
  * REMARKS
- * The order of vectors in directionsNESW has been chosen to correspond to rotations
- * by 90 degrees with increasing index value. This setup is utilized in the rotation
+ * The order of vectors in NESW (North East South West) has been chosen to correspond to rotations
+ * by 90 degrees clockwise with increasing index value. This setup is utilized in the two rotation
  * methods below.
  */
-class Direction {
+final class Direction {
 
     /**
      * List of valid directions in the N,E,S,W order.
@@ -29,44 +30,18 @@ class Direction {
     }
 
     /**
-     * Rotates the given vector clockwise (right).
-     */
-    public static Vector rotateClockwise(Vector v) {
-        int directionIndex = getDirectionIndex(v);
-
-        // If the new index points beyond our range then wrap it back to the front.
-        int newDirectionIndex = directionIndex + 1;
-        if (newDirectionIndex == 4) {
-            newDirectionIndex = 0;
-        }
-
-        return NESW.get(newDirectionIndex);
-    }
-
-    /**
-     * Rotates the given vector counter-clockwise (left).
-     */
-    public static Vector rotateCounterClockwise(Vector v) {
-        int directionIndex = getDirectionIndex(v);
-
-        // If the new index points before our range then wrap it back to the end.
-        int rotatedDirectionIndex = directionIndex - 1;
-        if (rotatedDirectionIndex == -1) {
-            rotatedDirectionIndex = 3;
-        }
-
-        return NESW.get(rotatedDirectionIndex);
-    }
-
-    /**
      * Validates the given vector as a valid direction. If not a valid
-     * direction throws IndexOutOfBoundsException. If valid does nothing.
+     * direction throws IndexOutOfBoundsException otherwise does nothing.
      */
     public static void validateAsDirection(Vector v) {
         getDirectionIndex(v);
     }
 
-    private static int getDirectionIndex(Vector v) {
+    /**
+     * Returns the index (into NESW) of the given direction. If not a valid
+     * direction throws IndexOutOfBoundsException.
+     */
+    public static int getDirectionIndex(Vector v) {
         int directionIndex = NESW.indexOf(v);
         if (directionIndex == -1) {
             throw new IndexOutOfBoundsException(

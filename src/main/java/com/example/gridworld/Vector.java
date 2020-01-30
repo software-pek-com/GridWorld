@@ -46,4 +46,38 @@ class Vector {
     @Override public String toString() {
         return String.format("[%d,%d]", x, y);
     }
+
+    /**
+     * Returns a vector resulting from rotation of
+     * this vector clockwise (left) by 90 degrees.
+     * This vector is unchanged.
+     */
+    public Vector rotateClockwiseBy90() {
+        int directionIndex = Direction.getDirectionIndex(this);
+
+        // If the new index points beyond our range then wrap it to the start.
+        int newDirectionIndex = directionIndex + 1; // +1 for counter-clockwise.
+        if (newDirectionIndex == 4) {
+            newDirectionIndex = 0;
+        }
+
+        return Direction.NESW.get(newDirectionIndex);
+    }
+
+    /**
+     * Returns a vector resulting from rotation of
+     * this vector counter-clockwise (left) by 90 degrees.
+     * This vector is unchanged.
+     */
+    public Vector rotateCounterClockwiseBy90() {
+        int directionIndex = Direction.getDirectionIndex(this);
+
+        // If the new index points before our range then wrap it to the end.
+        int rotatedDirectionIndex = directionIndex - 1; // -1 for counter-clockwise.
+        if (rotatedDirectionIndex == -1) {
+            rotatedDirectionIndex = 3;
+        }
+
+        return Direction.NESW.get(rotatedDirectionIndex);
+    }
 }

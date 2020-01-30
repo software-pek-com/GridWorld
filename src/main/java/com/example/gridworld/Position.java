@@ -4,16 +4,12 @@ import java.util.Objects;
 
 /**
  * Represents cell coordinates in the GridWrold frame of reference.
- * 
- * REMARKS
- * Since the GridWorld is infinite, the default (and arbitrary) choice
- * of (0,0) is taken to be the starting position of the Machine.
  */
 class Position {
     private int x;
     private int y;
 
-    private static Position zero = new Position();
+    private static final Position zero = new Position();
 
     public static Position getDefault() { return zero; }
 
@@ -23,7 +19,7 @@ class Position {
     }
 
     /**
-     * Creates an instance of this class initialized from given parameters.
+     * Creates an instance of this class initialized from the given parameters.
      */
     public Position(int x, int y) {
         this.x = x;

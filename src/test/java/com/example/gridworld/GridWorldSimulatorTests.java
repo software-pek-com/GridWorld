@@ -64,7 +64,7 @@ public class GridWorldSimulatorTests {
 
 		assertThat(target.isCellBlack(blackPosition), is(true));
 
-		target.toggleCellColour(blackPosition);
+		target.flipCellColour(blackPosition);
 
 		assertThat(target.isCellBlack(blackPosition), is(false));
 	}
@@ -76,7 +76,7 @@ public class GridWorldSimulatorTests {
 
 		assertThat(target.isCellBlack(whitePosition), is(false));
 
-		target.toggleCellColour(whitePosition);
+		target.flipCellColour(whitePosition);
 
 		assertThat(target.isCellBlack(whitePosition), is(true));
 	}

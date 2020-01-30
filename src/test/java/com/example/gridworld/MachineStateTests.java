@@ -43,7 +43,7 @@ public class MachineStateTests {
 		target.clockwiseMove();
 
 		assertEquals(new Position(0,-1), target.getPosition());
-		assertEquals(Direction.rotateClockwise(Direction.getDefault()), target.getDirection());
+		assertEquals(Direction.getDefault().rotateClockwiseBy90(), target.getDirection());
 	}
 
 	@Test
@@ -56,6 +56,6 @@ public class MachineStateTests {
 		target.counterClockwiseMove();
 
 		assertEquals(new Position(0,1), target.getPosition());
-		assertEquals(Direction.rotateCounterClockwise(Direction.getDefault()), target.getDirection());
+		assertEquals(Direction.getDefault().rotateCounterClockwiseBy90(), target.getDirection());
 	}
 }

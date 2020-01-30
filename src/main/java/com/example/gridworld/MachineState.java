@@ -2,6 +2,10 @@ package com.example.gridworld;
 
 /**
  * Represents the state of the GridWorld machine i.e. its position and direction.
+ *
+ * REMARKS
+ * Since the GridWorld is infinite, the default (and arbitrary) choice
+ * of (0,0) is taken to be the starting position of the Machine.
  */
 class MachineState {
 
@@ -47,7 +51,7 @@ class MachineState {
      */
     public void clockwiseMove() {
 
-        this.direction = Direction.rotateClockwise(this.direction);
+        this.direction = this.direction.rotateClockwiseBy90();
 
         stepInDirection();
     }
@@ -57,7 +61,7 @@ class MachineState {
      */
     public void counterClockwiseMove() {
 
-        this.direction = Direction.rotateCounterClockwise(this.direction);
+        this.direction = this.direction.rotateCounterClockwiseBy90();
 
         stepInDirection();
     }

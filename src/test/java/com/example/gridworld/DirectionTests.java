@@ -24,64 +24,6 @@ public class DirectionTests {
 	}
 
 	@Test(expected = IndexOutOfBoundsException.class)
-	public void Directions_Rotatation_Clockwise_Throws_For_Invalid() {
-		Direction.rotateClockwise(new Vector(1,1));
-	}
-
-	@Test
-	public void Directions_Rotatation_Clockwise_1() {
-		Vector result = Direction.rotateClockwise(Direction.NESW.get(0));
-		assertEquals(Direction.NESW.get(1), result);
-	}
-
-	@Test
-	public void Directions_Rotatation_Clockwise_2() {
-		Vector result = Direction.rotateClockwise(Direction.NESW.get(1));
-		assertEquals(Direction.NESW.get(2), result);
-	}
-
-	@Test
-	public void Directions_Rotatation_Clockwise_3() {
-		Vector result = Direction.rotateClockwise(Direction.NESW.get(2));
-		assertEquals(Direction.NESW.get(3), result);
-	}
-
-	@Test
-	public void Directions_Rotatation_Clockwise_4() {
-		Vector result = Direction.rotateClockwise(Direction.NESW.get(3));
-		assertEquals(Direction.NESW.get(0), result);
-	}
-
-	@Test(expected = IndexOutOfBoundsException.class)
-	public void Directions_Rotatation_Counter_Clockwise_Throws_For_Invalid() {
-		Direction.rotateCounterClockwise(new Vector(1,1));
-	}
-
-	@Test
-	public void Directions_Rotatation_Counter_Clockwise_1() {
-		Vector result = Direction.rotateCounterClockwise(Direction.NESW.get(3));
-		assertEquals(Direction.NESW.get(2), result);
-	}
-
-	@Test
-	public void Directions_Rotatation_Counter_Clockwise_2() {
-		Vector result = Direction.rotateCounterClockwise(Direction.NESW.get(2));
-		assertEquals(Direction.NESW.get(1), result);
-	}
-
-	@Test
-	public void Directions_Rotatation_Counter_Clockwise_3() {
-		Vector result = Direction.rotateCounterClockwise(Direction.NESW.get(1));
-		assertEquals(Direction.NESW.get(0), result);
-	}
-
-	@Test
-	public void Directions_Rotatation_Counter_Clockwise_4() {
-		Vector result = Direction.rotateCounterClockwise(Direction.NESW.get(0));
-		assertEquals(Direction.NESW.get(3), result);
-	}
-
-	@Test(expected = IndexOutOfBoundsException.class)
 	public void Directions_Validates_Invalid() {
 		Direction.validateAsDirection(new Vector(1,1));
 	}

@@ -83,4 +83,62 @@ public class VectorTests {
 
 		assertNotEquals(target1.hashCode(), target2.hashCode());
 	}
+
+	@Test(expected = IndexOutOfBoundsException.class)
+	public void Vector_Rotatation_Clockwise_Throws_For_Invalid() {
+		new Vector(1,1).rotateClockwiseBy90();
+	}
+
+	@Test
+	public void Vector_Rotatation_Clockwise_1() {
+		Vector result = Direction.NESW.get(0).rotateClockwiseBy90();
+		assertEquals(Direction.NESW.get(1), result);
+	}
+
+	@Test
+	public void Vector_Rotatation_Clockwise_2() {
+		Vector result = Direction.NESW.get(1).rotateClockwiseBy90();
+		assertEquals(Direction.NESW.get(2), result);
+	}
+
+	@Test
+	public void Vector_Rotatation_Clockwise_3() {
+		Vector result = Direction.NESW.get(2).rotateClockwiseBy90();
+		assertEquals(Direction.NESW.get(3), result);
+	}
+
+	@Test
+	public void Vector_Rotatation_Clockwise_4() {
+		Vector result = Direction.NESW.get(3).rotateClockwiseBy90();
+		assertEquals(Direction.NESW.get(0), result);
+	}
+
+	@Test(expected = IndexOutOfBoundsException.class)
+	public void Vector_Rotatation_Counter_Clockwise_Throws_For_Invalid() {
+		new Vector(1,1).rotateCounterClockwiseBy90();
+	}
+
+	@Test
+	public void Vector_Rotatation_Counter_Clockwise_1() {
+		Vector result = Direction.NESW.get(3).rotateCounterClockwiseBy90();
+		assertEquals(Direction.NESW.get(2), result);
+	}
+
+	@Test
+	public void Vector_Rotatation_Counter_Clockwise_2() {
+		Vector result = Direction.NESW.get(2).rotateCounterClockwiseBy90();
+		assertEquals(Direction.NESW.get(1), result);
+	}
+
+	@Test
+	public void Vector_Rotatation_Counter_Clockwise_3() {
+		Vector result = Direction.NESW.get(1).rotateCounterClockwiseBy90();
+		assertEquals(Direction.NESW.get(0), result);
+	}
+
+	@Test
+	public void Vector_Rotatation_Counter_Clockwise_4() {
+		Vector result = Direction.NESW.get(0).rotateCounterClockwiseBy90();
+		assertEquals(Direction.NESW.get(3), result);
+	}
 }

@@ -4,7 +4,7 @@ import java.util.HashSet;
 
 /**
  * Represents the GridWorld simulator which holds the state of the GridWorld and
- * moves the machine.
+ * moves the machine according to the rules.
  * 
  * REMARKS
  * The GridWorld is infinite.
@@ -13,8 +13,9 @@ import java.util.HashSet;
  * All cells are initially white i.e. blacklist is empty.
  */
 class GridWorldSimulator {
+    private int moveCount = 0;
     private HashSet<Position> blacklist;
-    private MachineState machine;
+    private MachineState machine = new MachineState(); // Default position and direction.
 
     /**
      * For unit test use only.
@@ -22,8 +23,6 @@ class GridWorldSimulator {
      */
     protected GridWorldSimulator(HashSet<Position> blacklist) {
         this.blacklist = blacklist;
-        //Default position is (0,0) and direction is right/east.
-        this.machine = new MachineState();
     }
 
     /**
@@ -31,8 +30,6 @@ class GridWorldSimulator {
      */
     public GridWorldSimulator() {
         this.blacklist = new HashSet<Position>();
-        //Default position is (0,0) and direction is right/east.
-        this.machine = new MachineState();
     }
 
     /**
@@ -43,14 +40,14 @@ class GridWorldSimulator {
     }
 
     /**
-     * Toggles the given cell's colour i.e. black -> white, white -> black.
+     * Flips the given cell's colour black to white or white to black.
      */
-    public void toggleCellColour(Position cell) {
+    public void flipCellColour(Position cell) {
         if (isCellBlack(cell)) {
-            blacklist.remove(cell);
+            blacklist.remove(cell); // Black to white.
         }
         else {
-            blacklist.add(cell);
+            blacklist.add(cell); // White to black.
         }
     }
 
@@ -61,16 +58,18 @@ class GridWorldSimulator {
      * + At every move flip the colour of the base square.
      */
     public void moveMachineOnce() {
-        Position positionBeforeMove = machine.getPosition();
+        Position basePosition = machine.getPosition();
 
-        if (isCellBlack(positionBeforeMove)) {
+        if (isCellBlack(basePosition)) {
             machine.counterClockwiseMove();
         }
         else {
             machine.clockwiseMove();
         }
 
-        toggleCellColour(positionBeforeMove);
+        flipCellColour(basePosition);
+
+        ++moveCount;
     }
 
     /**
@@ -81,17 +80,21 @@ class GridWorldSimulator {
     }
 
     /**
+     * Returns a snapshot of the GridWorld (simulator) state.
+     */
+    public GridWorldData getSnapshot() {
+        return new GridWorldData(
+            moveCount,
+            blacklist,
+            machine.getPosition(),
+            machine.getDirection());
+    }
+
+    /**
      * For unit test use only.
      * Returns the set of black cells.
      */
     protected HashSet<Position> getBlacklist() {
         return blacklist;
-    }
-
-    /**
-     * Returns a snapshot of the GridWorldSimulator state.
-     */
-    public GridWorldData getSnapshot() {
-        return new GridWorldData(blacklist, machine.getPosition(), machine.getDirection());
     }
 }

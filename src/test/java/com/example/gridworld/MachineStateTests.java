@@ -14,13 +14,13 @@ public class MachineStateTests {
 	public void MachineState_Default_Constructor() {
 		MachineState target = new MachineState();
 
-		assertEquals(CellRef.getDefault(), target.getPosition());
+		assertEquals(Position.getDefault(), target.getPosition());
 		assertEquals(Direction.getDefault(), target.getDirection());
 	}
 
 	@Test
 	public void MachineState_Constructor() {
-		CellRef expectedPosition = new CellRef(1,2);
+		Position expectedPosition = new Position(1,2);
 		Vector expectedDirection = Direction.NESW.get(3);
 		MachineState target = new MachineState(expectedPosition, expectedDirection);
 
@@ -30,7 +30,7 @@ public class MachineStateTests {
 
 	@Test(expected = IndexOutOfBoundsException.class)
 	public void MachineState_Constructor_With_Invalid_Direction() {
-		new MachineState(new CellRef(1,2), new Vector(1, 1));
+		new MachineState(new Position(1,2), new Vector(1, 1));
 	}
 
 	@Test
@@ -42,7 +42,7 @@ public class MachineStateTests {
 
 		target.clockwiseMove();
 
-		assertEquals(new CellRef(0,-1), target.getPosition());
+		assertEquals(new Position(0,-1), target.getPosition());
 		assertEquals(Direction.rotateClockwise(Direction.getDefault()), target.getDirection());
 	}
 
@@ -55,7 +55,7 @@ public class MachineStateTests {
 
 		target.counterClockwiseMove();
 
-		assertEquals(new CellRef(0,1), target.getPosition());
+		assertEquals(new Position(0,1), target.getPosition());
 		assertEquals(Direction.rotateCounterClockwise(Direction.getDefault()), target.getDirection());
 	}
 }

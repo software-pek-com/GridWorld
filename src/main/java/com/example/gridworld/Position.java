@@ -3,22 +3,22 @@ package com.example.gridworld;
 import java.util.Objects;
 
 /**
- * The CellRef class provides cell coordinates in the GridWrold frame of
+ * The Position class provides cell coordinates in the GridWrold frame of
  * reference.
  * 
  * REMARKS
  * Since the GridWorld is infinite, the default (and arbitrary) choice
  * of (0,0) is taken to be the starting position of the Machine.
  */
-class CellRef {
+class Position {
     private int x;
     private int y;
 
-    private static CellRef zero = new CellRef();
+    private static Position zero = new Position();
 
-    public static CellRef getDefault() { return zero; }
+    public static Position getDefault() { return zero; }
 
-    private CellRef() {
+    private Position() {
         this.x = 0;
         this.y = 0;
     }
@@ -26,7 +26,7 @@ class CellRef {
     /**
      * Creates an instance of this class initialized from given parameters.
      */
-    public CellRef(int x, int y) {
+    public Position(int x, int y) {
         this.x = x;
         this.y = y;
     }
@@ -46,7 +46,7 @@ class CellRef {
     }
 
     @Override public boolean equals(Object o) {
-        CellRef c = (CellRef) o;
+        Position c = (Position) o;
         return c.x == x && c.y == y;
     }
 

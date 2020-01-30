@@ -12,30 +12,30 @@ import java.util.HashSet;
  * All cells are initially white.
  */
 class GridWorldState {
-    private HashSet<CellRef> blacklist;
+    private HashSet<Position> blacklist;
     private MachineState machine;
 
     public GridWorldState() {
-        this.blacklist = new HashSet<CellRef>();
+        this.blacklist = new HashSet<Position>();
         this.machine = new MachineState();
     }
 
-    public GridWorldState(CellRef position, Vector direction) {
-        this.blacklist = new HashSet<CellRef>();
+    public GridWorldState(Position position, Vector direction) {
+        this.blacklist = new HashSet<Position>();
         this.machine = new MachineState(position, direction);
     }
 
     /**
      * Returns true if cell is black and false otherwise.
      */
-    public boolean isCellBlack(CellRef cell) {
+    public boolean isCellBlack(Position cell) {
         return blacklist.contains(cell);
     }
 
     /**
      * Returns the given cell's colour.
      */
-    public CellColour getCellColour(CellRef cell) {
+    public CellColour getCellColour(Position cell) {
         if (isCellBlack(cell)) {
             return CellColour.Black;
         }
@@ -47,7 +47,7 @@ class GridWorldState {
     /**
      * Toggles the given cell's colour i.e. black -> white, white -> black.
      */
-    public void toggleCellColour(CellRef cell) {
+    public void toggleCellColour(Position cell) {
         if (isCellBlack(cell)) {
             blacklist.remove(cell);
         }
@@ -63,7 +63,7 @@ class GridWorldState {
      * + At every move flip the colour of the base square.
      */
     public void moveOnce() {
-        CellRef positionBeforeMove = machine.getPosition();
+        Position positionBeforeMove = machine.getPosition();
 
         if (isCellBlack(positionBeforeMove)) {
             machine.counterClockwiseMove();
@@ -78,7 +78,7 @@ class GridWorldState {
     /**
      * Returns the set of black cells.
      */
-    public HashSet<CellRef> getBlacklist() {
+    public HashSet<Position> getBlacklist() {
         return blacklist;
     }
 

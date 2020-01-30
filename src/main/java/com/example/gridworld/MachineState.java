@@ -6,7 +6,7 @@ package com.example.gridworld;
  */
 class MachineState {
 
-    private CellRef position;
+    private Position position;
     private Vector direction;
 
     /**
@@ -14,7 +14,7 @@ class MachineState {
      * and direction facing east (right).
      */
     public MachineState() {
-        this.position = CellRef.getDefault(); // (0,0)
+        this.position = Position.getDefault(); // (0,0)
         this.direction = Direction.getDefault(); // Facing east.
     }
 
@@ -22,7 +22,7 @@ class MachineState {
      * Creates an instance of this class with the given values for
      * position and direction.
      */
-    public MachineState(CellRef position, Vector direction) {
+    public MachineState(Position position, Vector direction) {
 
         Direction.validateAsDirection(direction);
         this.position = position;
@@ -32,7 +32,7 @@ class MachineState {
     /**
      * Returns the position of the machine.
      */
-    public CellRef getPosition() {
+    public Position getPosition() {
         return position;
     }
 
@@ -64,7 +64,7 @@ class MachineState {
     }
 
     private void stepInDirection() {
-        position = new CellRef(
+        position = new Position(
             position.getX() + direction.getX(),
             position.getY() + direction.getY());
     }

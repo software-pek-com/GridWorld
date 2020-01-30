@@ -9,12 +9,12 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class PositionTests {
+public class VectorTests {
 
 	class AnotherType {}
 
 	@Test
-	public void Position_Default_Constructor() {
+	public void Vector_Default_Constructor() {
 		Position target = Position.getDefault();
 
 		assertEquals(0, target.getX());
@@ -22,7 +22,7 @@ public class PositionTests {
 	}
 
 	@Test
-	public void Position_Constructor() {
+	public void Vector_Constructor() {
 		Position target = new Position(-1,1);
 
 		assertEquals(-1, target.getX());
@@ -30,28 +30,28 @@ public class PositionTests {
 	}
 
 	@Test
-	public void Position_getX() {
+	public void Vector_getX() {
 		Position target = new Position(-1,1);
 
 		assertEquals(-1, target.getX());
 	}
 
 	@Test
-	public void Position_getY() {
+	public void Vector_getY() {
 		Position target = new Position(-1,1);
 
 		assertEquals(1, target.getY());
 	}
 
 	@Test(expected = ClassCastException.class)
-	public void Position_Equals_Throws_When_Comparing_To_Another_Type() {
+	public void Vector_Equals_Throws_When_Comparing_To_Another_Type() {
 		Position target1 = new Position(-1,1);
 
 		target1.equals((Object)new AnotherType());
 	}
 
 	@Test
-	public void Position_Not_Equals_When_Cells_Have_Different_Coordinates() {
+	public void Vector_Not_Equals() {
 		Position target1 = new Position(-1,-1);
 		Position target2 = new Position(-1,1);
 
@@ -60,7 +60,7 @@ public class PositionTests {
 	}
 
 	@Test
-	public void Position_Equals_When_Cells_Have_Same_Coordinates() {
+	public void Vector_Equals() {
 		Position target1 = new Position(-1,1);
 		Position target2 = new Position(-1,1);
 
@@ -69,7 +69,7 @@ public class PositionTests {
 	}
 
 	@Test
-	public void Position_Same_Hash_Code_With_Same_Coordinates() {
+	public void Vector_Same_Hash() {
 		Position target1 = new Position(-1,1);
 		Position target2 = new Position(-1,1);
 
@@ -77,7 +77,7 @@ public class PositionTests {
 	}
 
 	@Test
-	public void Position_Different_Hash_Code_With_Different_Coordinates() {
+	public void Vector_Different_Hash() {
 		Position target1 = new Position(-1,-1);
 		Position target2 = new Position(-1,1);
 

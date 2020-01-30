@@ -60,21 +60,16 @@ class GridWorldState {
      * Performs one move of the machine as per the rules.
      */
     public void moveMachine() {
-        CellRef currentPosition = machine.getPosition();
-        Vector direction = machine.getDirection();
+        CellRef positionBeforeMove = machine.getPosition();
 
-        Vector newDirection;
-        if (isCellBlack(currentPosition)) {
-            newDirection = Direction.rotateCounterClockwise(direction);
+        if (isCellBlack(positionBeforeMove)) {
+            machine.counterClockwiseMove();
         }
         else {
-            newDirection = Direction.rotateClockwise(direction);
+            machine.clockwiseMove();
         }
 
-        machine.setDirection(newDirection);
-        machine.moveInDirection();
-
-        toggleCellColour(currentPosition);
+        toggleCellColour(positionBeforeMove);
     }
 
     /**

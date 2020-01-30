@@ -34,92 +34,28 @@ public class MachineStateTests {
 	}
 
 	@Test
-	public void MachineState_Set_Direction() {
+	public void MachineState_Clockwise_Move_Rotates_Right_And_Steps() {
 
+		// Default position is CellRef(0,0).
+		// Default direction is east/right.
 		MachineState target = new MachineState();
 
-		Vector expectedDirection = Direction.NESW.get(3);
-		target.setDirection(expectedDirection);
+		target.clockwiseMove();
 
-		assertEquals(expectedDirection, target.getDirection());
+		assertEquals(new CellRef(0,-1), target.getPosition());
+		assertEquals(Direction.rotateClockwise(Direction.getDefault()), target.getDirection());
 	}
 
-	@Test(expected = IndexOutOfBoundsException.class)
-	public void MachineState_Set_Direction_Invalid() {
+	@Test
+	public void MachineState_Counter_Clockwise_Move_Rotates_Left_And_Steps() {
 
+		// Default position is CellRef(0,0).
+		// Default direction is east/right.
 		MachineState target = new MachineState();
-		target.setDirection(new Vector(1, 1));
-	}
 
-	@Test
-	public void MachineState_Moves_In_Direction_1() {
-		
-		MachineState target = new MachineState(new CellRef(), Direction.NESW.get(0));
+		target.counterClockwiseMove();
 
-		CellRef position = target.getPosition();
-		Vector direction = target.getDirection();
-		
-		target.moveInDirection();
-
-		CellRef expectedPosition = new CellRef(
-			position.getX() + direction.getX(), position.getY() + direction.getY()
-		);
-
-		assertEquals(expectedPosition, target.getPosition());
-		assertEquals(direction, target.getDirection());
-	}
-
-	@Test
-	public void MachineState_Moves_In_Direction_2() {
-		
-		MachineState target = new MachineState(new CellRef(), Direction.NESW.get(1));
-
-		CellRef position = target.getPosition();
-		Vector direction = target.getDirection();
-		
-		target.moveInDirection();
-
-		CellRef expectedPosition = new CellRef(
-			position.getX() + direction.getX(), position.getY() + direction.getY()
-		);
-
-		assertEquals(expectedPosition, target.getPosition());
-		assertEquals(direction, target.getDirection());
-	}
-
-	@Test
-	public void MachineState_Moves_In_Direction_3() {
-		
-		MachineState target = new MachineState(new CellRef(), Direction.NESW.get(2));
-
-		CellRef position = target.getPosition();
-		Vector direction = target.getDirection();
-		
-		target.moveInDirection();
-
-		CellRef expectedPosition = new CellRef(
-			position.getX() + direction.getX(), position.getY() + direction.getY()
-		);
-
-		assertEquals(expectedPosition, target.getPosition());
-		assertEquals(direction, target.getDirection());
-	}
-
-	@Test
-	public void MachineState_Moves_In_Direction_4() {
-		
-		MachineState target = new MachineState(new CellRef(), Direction.NESW.get(3));
-
-		CellRef position = target.getPosition();
-		Vector direction = target.getDirection();
-		
-		target.moveInDirection();
-
-		CellRef expectedPosition = new CellRef(
-			position.getX() + direction.getX(), position.getY() + direction.getY()
-		);
-
-		assertEquals(expectedPosition, target.getPosition());
-		assertEquals(direction, target.getDirection());
+		assertEquals(new CellRef(0,1), target.getPosition());
+		assertEquals(Direction.rotateCounterClockwise(Direction.getDefault()), target.getDirection());
 	}
 }

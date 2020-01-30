@@ -1,8 +1,14 @@
 package com.example.gridworld;
 
 class CellRef {
-    int x;
-    int y;
+    private int x;
+    private int y;
+
+    public CellRef() {
+        super();
+        this.x = 0;
+        this.y = 0;
+    }
 
     public CellRef(int x, int y) {
         super();
@@ -10,12 +16,20 @@ class CellRef {
         this.y = y;
     }
 
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
     public boolean equals(Object o) {
-        Cell c = (Cell) o;
+        CellRef c = (CellRef) o;
         return c.x == x && c.y == y;
     }
 
     public int hashCode() {
-        return new Integer(x + "0" + y);
+        return (x + "," + y).hashCode();
     }
 }

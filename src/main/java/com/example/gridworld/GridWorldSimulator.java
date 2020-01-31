@@ -4,13 +4,22 @@ import java.util.HashSet;
 
 /**
  * Represents the GridWorld simulator which holds the state of the GridWorld and
- * moves the machine according to the rules.
+ * moves the machine according to the rules. Since the world is infinite it has been
+ * decided to use a set (blacklist) to keep track of black cells - all other cells are white.
  * 
  * REMARKS
  * The GridWorld is infinite.
  * The default (and arbitrary) choice of the starting position of the Machine is taken to be (0,0).
  * The default choice of the starting direction is right/east.
  * All cells are initially white i.e. blacklist is empty.
+ * 
+ * The rules for machine movements are such that the path is a fully deterministic function in that
+ * the starting conditions are always the same (all white grid with machine facing right), and the
+ * same input (moveCount) produces the same output.
+ * 
+ * For this reason the GridWorldController can be optimized to not perform simulations it has already
+ * done. All that is required for this is to check if there already is an output file corresponding to
+ * the given input (moveCount).
  */
 class GridWorldSimulator {
     private int moveCount = 0;

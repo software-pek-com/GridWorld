@@ -4,9 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Represents valid GridWorld directions wrt (0,0) and helper
- * methods to correctly apply rotations (clockwise and counter-clockwise)
- * around the (0,0) position.
+ * Represents valid GridWorld directions wrt (0,0) and helper methods.
  * 
  * REMARKS
  * The order of vectors in NESW (North East South West) has been chosen to correspond to rotations

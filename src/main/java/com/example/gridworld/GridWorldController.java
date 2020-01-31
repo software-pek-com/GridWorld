@@ -25,6 +25,9 @@ public class GridWorldController {
 		return dateFormat.format(dateobj);
 	}
 
+	/**
+	 * GET endpoint method used to quickle check connectivity.
+	 */
 	@RequestMapping("/hello")
 	public String index() {
 		return "Greetings from Grid World! The time now is "+ nowAsString();
@@ -50,7 +53,7 @@ public class GridWorldController {
 		throws Exception {
 
 		// Use moveCount as the 'simulation identifier' because the same
-		// move number always produces the same GridWorld.
+		// moveCount always produces the same GridWorld.
 		String fileName = String.format("%s.json", moveCount);
 		String timeStamp = nowAsString();
 		
@@ -68,7 +71,7 @@ public class GridWorldController {
 				gridWorld.moveMachineOnce();
 			}
 
-			// Write GridWorld snapshot to file.
+			// Write GridWorld snapshot to file as JSON.
 			Gson gson = new Gson();
 			String snapshotAsJson = gson.toJson(gridWorld.getSnapshot());
 
@@ -84,6 +87,7 @@ public class GridWorldController {
 			response = String.format("Simulation '%s' already existed [%s].", fileName, timeStamp);
 		}
 
+		// Report with a string message.
 		return response;
 	}
 }

@@ -16,6 +16,9 @@ Please provide support documentation.
 
 The solution to the test project has been developed in Java using Visual Studio Code (VS Code). Since Java is not my main skill I decided to take the path of least resistance and used what I know works: Visual Studio Code for coding and debugging, and Docker for deployment.
 
+This document describes tools used, how to build and debug, and how to package and deploy the binaries to Docker as the chosen platform.
+The code itself is well documented with a good set of unit tests. In the time available it was not possible to provide complete code coverage with tests. I write software with unit tests from the start (e.g. TDD), except for boiler plate code. Also, given that I am not a Java expert, I am not aware of all coding patterns (structure of code comments, formatting, tools etc) so this project is the best I could do in a couple of coding sessions.
+
 ### Build and Debug
 
 To build and debug you need to open the GridWorld workspace in VS Code (assuming the current directory is GridWorld):
@@ -41,13 +44,13 @@ To call the PUT endpoint I used a Google Chrome browser extension [Advanced REST
 
 Since my workstation does not have a running webserver I decided to package and deploy the GridWorld web app using Docker. The project's Dockerfile builds the image. Before you can do that you have to force the jar package to be created. In the GridWorld directory issue the following commands:
 
-    cmd> mvn package    # Required Apache Maven to be installed
+    cmd> mvn package    # Requires Apache Maven to be installed
 
 After this is done the Docker image can be built:
 
     cmd> docker build . -t gridworld1
 
-After the images has been built you can start the container:
+After the image has been built you can start the container:
 
     cmd> docker run -it -p 8080:8080 -d gridworld1
 
